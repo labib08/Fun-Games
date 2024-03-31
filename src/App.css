@@ -3,13 +3,29 @@
   text-align: center;
 
 }
+
+#particles canvas {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
 @media (min-width:1700px) {
-	TicTacToe-container {
+	.TicTacToe-container {
     background: black;
     text-align: center;
 
   }
   .TicTacToe-header {
+    color: white;
+    margin: auto;
+    text-align: center;
+    font-size: 70px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+  }
+  .HomePage-header {
     color: white;
     margin: auto;
     text-align: center;
@@ -91,6 +107,7 @@
   padding: 18px 34px;
   font-size: 18px;
   margin-left: 18px;
+  margin-bottom: 20px;
   border-radius: 50px;
   cursor: pointer;
   background: black;
@@ -178,3 +195,60 @@
   left: 1.5%;
   transform: skewY(-45deg);
 }
+.HomePage-container {
+  text-align: center;
+}
+.HomePage-header {
+  color: white;
+  margin: auto;
+  text-align: center;
+  font-size: 70px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.HomePage-header-2{
+  color: white;
+  margin: auto;
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 120px;
+  margin-top: 20px;
+}
+.HomePage-btn {
+  font-weight: 700;
+  padding: 30px 120px;
+  color: #fff;
+  border: 1px solid #fff;
+
+  font-size: 30px;
+  margin-left: 18px;
+  margin-bottom: 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: black;
+	position: relative;
+	background-color: transparent;
+	transition: 0.3s ease-in-out;
+
+}
+.HomePage-btn span {
+  z-index: 1;
+}
+.HomePage-btn:hover {
+  color: #0d9aa4;
+  background-color: #fff;
+  background-position: left;
+  transition: 0.5s ease-in-out;
+}
+.HomePage-btn::before {
+  content: "";
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  background: #fff;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+}
+

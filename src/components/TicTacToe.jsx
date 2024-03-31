@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Navigate } from 'react-router-dom';
 function Box ({value, onClick, isXTurn, isLive}) {
     let boxClass = "TicTacToe-box";
     if (value === "X") {
@@ -141,10 +141,17 @@ const TicTacToe = () => {
 
     }, [box, isXTurn]);
 
+    const [goHome, setGoHome] = useState(false);
+
+    if (goHome) {
+        return <Navigate to = "/home"/>
+    }
     return (
         <div className="TicTacToe-container">
             <h1 className="TicTacToe-header">Tic Tac Toe</h1>
+
             <StatusHeader isLive={isLive} isXTurn={isXTurn} status= {status} winner = {winner}/>
+
             <div className="TicTacToe-board">
                 <Strike newClass={winType} winner = {winner}/>
                 <div className="TicTacToe-row1">
@@ -164,6 +171,8 @@ const TicTacToe = () => {
                 </div>
             </div>
             <button onClick = {handleReset} className="TicTacToe-reset">Reset</button>
+            <br/>
+            <button onClick={() => setGoHome(true)} className="TicTacToe-reset" >Home</button>
         </div>
     )
 };
