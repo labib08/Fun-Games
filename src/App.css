@@ -102,6 +102,7 @@
     transform: rotate(-60deg);
     transform-origin: right bottom;
   }
+
 }
 .TicTacToe-header,
 .hangman-header {
