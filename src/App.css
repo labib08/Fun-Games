@@ -34,7 +34,74 @@
     margin-top: 20px;
 
   }
+  .hangman-container {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hangman-drawing {
+    position: relative;
+    margin-top: 50px;
+  }
+  .hangman-head {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 10px solid white;
+    position: absolute;
+    top: 49px;
+    right: -30px;
+  }
 
+  .hangman-body {
+    width: 10px;
+    height: 100px;
+    background: white;
+    position: absolute;
+    top: 118px;
+    right: 0;
+  }
+  .hangman-right-arm {
+    width: 100px;
+    height: 10px;
+    background: white;
+    position: absolute;
+    top: 148px;
+    right: -100px;
+    transform: rotate(-30deg);
+    transform-origin: left bottom;
+  }
+  .hangman-left-arm {
+    width: 100px;
+    height: 10px;
+    background: white;
+    position: absolute;
+    top: 148px;
+    right: 10px;
+    transform: rotate(30deg);
+    transform-origin: right bottom;
+  }
+  .hangman-right-leg {
+    width: 100px;
+    height: 10px;
+    background: white;
+    position: absolute;
+    top: 208px;
+    right: -90px;
+    transform: rotate(60deg);
+    transform-origin: left bottom;
+  }
+  .hangman-left-leg {
+    width: 100px;
+    height: 10px;
+    background: white;
+    position: absolute;
+    top: 208px;
+    right: 0;
+    transform: rotate(-60deg);
+    transform-origin: right bottom;
+  }
 }
 .TicTacToe-header,
 .hangman-header {
@@ -376,6 +443,10 @@
   visibility: visible;
 }
 
+.letter-visible-red {
+  visibility: visible;
+  color: red;
+}
 .letter-hidden {
   visibility: hidden;
 }
@@ -410,5 +481,5 @@
 
 .keyboard-button:hover:not(:disabled),
 .keyboard-button:focus:not(:disabled) {
-  background-color: hsl(200, 100%, 75%);
+  background-color:  rgb(50, 51, 51);
 }

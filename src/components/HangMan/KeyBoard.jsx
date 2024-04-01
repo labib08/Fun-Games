@@ -26,13 +26,22 @@ const keys = [
     "y",
     "z",
   ];
-const KeyBoard = () => {
-
+const KeyBoard = ({activeLetters, inactiveLetters, addGuessedLetter, disabled}) => {
+    let keyboardClass = "keyboard-button";
     return (
         <div className="keyboard-container">
             {keys.map(key => {
+                const isActive = activeLetters.includes(key);
+                const isInActive = inactiveLetters.includes(key);
                 return (
-                    <button className="keyboard-button" key = {key}> {key} </button>
+                    <button
+                    onClick={() => addGuessedLetter(key)}
+                    className={keyboardClass + (isActive ? " active" : "") + (isInActive ? " inactive" : "")}
+                    disabled = {isActive || isInActive || disabled}
+                    key={key}
+                    >
+                        {key}
+                    </button>
                 )
             })}
         </div>
