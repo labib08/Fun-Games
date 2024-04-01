@@ -333,6 +333,9 @@
   margin: 0 auto;
   align-items: center;
 }
+.hangman-align-items-center {
+  display: flex;
+}
 .hangman-drawing {
   position: relative;
   margin-top: 50px;

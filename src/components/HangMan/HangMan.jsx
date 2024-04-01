@@ -41,16 +41,17 @@ const HangMan = () => {
     return (
         <div className="hangman-container">
             <h1 className="hangman-header">HangMan</h1>
-            <Drawing numberOfGuesses = {incorrectLetters.length}/>
-            <br/>
-            <GuessWord guessedLetters = {guessedLetters} wordsGuess = {wordsGuess} reveal = {isLose}/>
-            <br/>
-            <div style = {{alignSelf: "stretch"}}>
-                <KeyBoard activeLetters = {guessedLetters.filter(letter => wordsGuess.includes(letter))}
-                          inactiveLetters = {incorrectLetters}
-                          addGuessedLetter = {addGuessedLetter}
-                          disabled = {isWin || isLose}
-                />
+
+                    <Drawing numberOfGuesses = {incorrectLetters.length}/>
+                    <br/>
+                    <GuessWord guessedLetters = {guessedLetters} wordsGuess = {wordsGuess} reveal = {isLose}/>
+                    <br/>
+                    <div style = {{alignSelf: "stretch"}}>
+                        <KeyBoard activeLetters = {guessedLetters.filter(letter => wordsGuess.includes(letter))}
+                                inactiveLetters = {incorrectLetters}
+                                addGuessedLetter = {addGuessedLetter}
+                                disabled = {isWin || isLose}
+                        />
             </div>
             {isWin &&  <h1 className="hangman-header">Win!</h1>}
             {isLose && <h1 className="hangman-header">:((</h1>}
