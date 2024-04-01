@@ -36,7 +36,8 @@
   }
 
 }
-.TicTacToe-header {
+.TicTacToe-header,
+.hangman-header {
   color: white;
   margin: auto;
   text-align: center;
@@ -252,3 +253,48 @@
   transition: 0.3s ease-in-out;
 }
 
+.hangman-navbar {
+  display: flex;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.hangman-container {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+}
+.hangman-drawing {
+  position: relative;
+  margin-top: 50px;
+}
+.hangman-hanger-1 {
+  height: 50px;
+  width: 10px;
+  background: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hangman-hanger-2 {
+  height: 10px;
+  width: 200px;
+  background: white;
+  margin-left: 120px;
+}
+
+.hangman-hanger-3 {
+  height: 400px;
+  width: 10px;
+  background: white;
+  margin-left: 120px;
+}
+
+.hangman-hanger-4 {
+  height: 10px;
+  width: 250px;
+  background: white;
+}

@@ -1,7 +1,7 @@
 import './App.css';
+import HangMan from './components/HangMan/HangMan';
 import HomePage from './components/HomePage';
 import TicTacToe from './components/TicTacToe';
-
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 function App() {
@@ -12,6 +12,7 @@ function App() {
           <Route index element = {<HomePage />} />
           <Route path='/home' element = {<HomePage />} />
           <Route path='/tictactoe' element = {<TicTacToe />} />
+          <Route path='/hangman' element = {<HangMan />} />
         </Routes>
       </BrowserRouter>
     </div>
