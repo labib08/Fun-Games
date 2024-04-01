@@ -1,38 +1,37 @@
 import { useState } from "react";
 import { Navigate } from 'react-router-dom';
-import words from "./data";
-
-function Draw ({}) {
-    return (
-        <div className="hangman-drawing">
-            <div className="hangman-hanger-1"/>
-            <div className = "hangman-hanger-2"/>
-            <div className = "hangman-hanger-3"/>
-            <div className = "hangman-hanger-4"/>
-        </div>
-    )
-}
+import Drawing from "./Drawing";
+import GuessWord from "./GuessWord.jsx";
+import KeyBoard from "./KeyBoard";
+import words from "./data.js";
 
 const HangMan = () => {
-    const [guessWord, setGuessWord] = useState(() => {
-        return words[Math.floor(Math.random * words.length)]
-    });
+
+    const [wordsGuess, setGuessWords] = useState (() => {
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        return randomWord;
+    } );
+
+    const [guessedLetters, setGuessedLetters] = useState([""]);
+
+    const incorrectLetters = guessedLetters.filter (
+        letter => !wordsGuess.includes(letter)
+    )
     const [goHome, setGoHome] = useState(false);
-    //const [guessedLetters, setGuessedLetters] = useState<string[]>([])
-
     if (goHome) {
-        return <Navigate to = "/home"/>
+        return <Navigate to = "/home"/>;
     }
-
-
     return (
         <div className="hangman-container">
-            <div className= "hangman-navbar">
-                <h1 className="hangman-header">HangMan</h1>
-                <button onClick={() => setGoHome(true)} className="TicTacToe-reset" >Home</button>
+            <h1 className="hangman-header">HangMan</h1>
+            <Drawing numberOfGuesses = {incorrectLetters.length}/>
+            <br/>
+            <GuessWord />
+            <br/>
+            <div style = {{alignSelf: "stretch"}}>
+                <KeyBoard/>
             </div>
-            <Draw/>
-
+            <button onClick={() => setGoHome(true)} className="TicTacToe-reset" >Home</button>
         </div>
     );
 }
