@@ -12,9 +12,7 @@ function Box ({value, onClick, isXTurn, isLive}) {
         if (isLive) {
             boxClass += isXTurn  ? " next-X-turn" : " next-O-turn";
         }
-
     }
-
     return (<button onClick = {onClick} className={boxClass}>{value}</button>);
 }
 function Strike ({newClass, winner}) {
@@ -105,14 +103,26 @@ const TicTacToe = () => {
         }
         return null;
     }
-
+    function aiTurn(box) {
+        let copyBox = [...box];
+        for (var i =0; i< box.length; i++) {
+            //miniMax(box, 0, true);
+            if (copyBox[i] == '') {
+                copyBox[i] = 'X';
+                setIsXTurn(false);
+                setBox(copyBox);
+                return;
+            }
+        }
+    }
     function handleClick(getCurrBox) {
         let copyBox = [...box];
         if (getWinner(copyBox) || copyBox[getCurrBox]) {
             return;
         }
+
         copyBox[getCurrBox] = isXTurn ? "X" : "O";
-        setIsXTurn(!isXTurn);
+        setIsXTurn(true);
         setBox(copyBox);
     }
 
@@ -123,6 +133,16 @@ const TicTacToe = () => {
         setWinType('');
         setWinner('');
     }
+    function sleep() {
+        return setTimeout(() => {
+            aiTurn(box);
+          }, 2000);
+    }
+    useEffect(() => {
+        if (isXTurn && isLive) {
+            sleep();
+        }
+      }, [isXTurn, isLive, box]);
     useEffect(() => {
         if (!getWinner(box) && box.every(item =>item !== '' )) {
             setStatus("Game Drawn!");
@@ -135,8 +155,11 @@ const TicTacToe = () => {
             setWinner(getWinner(box));
         }
         else {
-            setStatus((isXTurn ? 'X' : 'O') + "'s Turn");
+            let xTurn = "X's Turn (Ai is thinking...)";
+            let oTurn = "O's Turn";
+            setStatus((isXTurn ? xTurn : oTurn));
             setIsLive(true);
+
         }
 
     }, [box, isXTurn]);
