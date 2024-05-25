@@ -7,15 +7,18 @@ import words from "./data.js";
 
 const HangMan = () => {
 
-    function getWord() {
-        return words[Math.floor(Math.random() * words.length)];
+    let randomNum = Math.floor(Math.random() * words.length);
+    function getWord({randomNum}) {
+
+        return words[randomNum];
     }
 
     function handleReset() {
-        setGuessWords(getWord());
+        randomNum = Math.floor(Math.random() * words.length);
+        setGuessWords(getWord(randomNum = {randomNum}));
         setGuessedLetters([""]);
     }
-    const [wordsGuess, setGuessWords] = useState(getWord());
+    const [wordsGuess, setGuessWords] = useState(getWord(randomNum = {randomNum}));
 
     const [guessedLetters, setGuessedLetters] = useState([""]);
 
@@ -58,6 +61,8 @@ const HangMan = () => {
             {!isWin && !isLose && <h1 className="hangman-header"> </h1> }
 
             <br/>
+            <button onClick = {handleReset} className="TicTacToe-reset">Hint</button>
+
             <button onClick = {handleReset} className="TicTacToe-reset">Reset</button>
 
             <button onClick={() => setGoHome(true)} className="TicTacToe-reset" >Home</button>

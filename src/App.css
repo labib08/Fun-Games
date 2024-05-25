@@ -102,6 +102,156 @@
     transform: rotate(-60deg);
     transform-origin: right bottom;
   }
+  .TicTacToe-status {
+    color: #fff;
+    font-size: 35px;
+    text-align: center;
+  }
+  .X-turn {
+    color: aqua;
+  }
+
+  .O-turn {
+    color: blanchedalmond;
+  }
+
+  .TicTacToe-header:hover{
+    color: #0d9aa4;
+    transition: 0.3s ease-in-out;
+  }
+
+  .TicTacToe-box {
+    cursor: pointer;
+    font-size: 70px;
+    height: 150px;
+    width:150px;
+    background: rgb(37, 37, 37);
+    border: 4px solid;
+    border-color: black;
+    border-radius: 12px;
+  }
+  .next-X-turn:hover::after {
+    content: "X";
+    opacity: 0.4;
+  }
+  .next-O-turn:hover::after {
+    content: "O";
+    opacity: 0.4;
+  }
+  .X-style {
+    color: aqua;
+  }
+
+  .O-style {
+    color: blanchedalmond;
+  }
+
+  .TicTacToe-board {
+    height: 450px;
+    width: 400px;
+    display: flex;
+    margin: auto;
+    margin-right: 540px;
+    margin-bottom: 40px;
+    position: relative;
+
+  }
+
+  .TicTacToe-reset {
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 18px 34px;
+    font-size: 18px;
+    margin-left: 18px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    background: black;
+    position: relative;
+    background-color: transparent;
+    transition: 0.3s ease-in-out;
+  }
+  .TicTacToe-reset span {
+    z-index: 1;
+  }
+  .TicTacToe-reset:hover {
+    color: #0d9aa4;
+    background-color: #fff;
+    background-position: left;
+    transition: 0.5s ease-in-out;
+  }
+  .TicTacToe-reset::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    background: #fff;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: 0.3s ease-in-out;
+  }
+  .strike-x {
+    position: absolute;
+    background-color:  aqua;
+  }
+
+  .strike-o {
+    position: absolute;
+    background-color:  blanchedalmond;
+  }
+
+  .strike-row-1 {
+    width: 110%;
+    margin-left: 5px;
+    height: 4px;
+    top: 16%;
+  }
+  .strike-row-2 {
+    width: 110%;
+    height: 4px;
+    top: 49%;
+    margin-left: 5px;
+  }
+  .strike-row-3 {
+    height: 4px;
+    top: 82%;
+    width: 110%;
+    margin-left: 5px;
+  }
+  .strike-column-1 {
+    height: 98%;
+    width: 4px;
+    left: 18%;
+    margin-top: 5px;
+  }
+  .strike-column-2 {
+    height: 98%;
+    width: 4px;
+    left: 56%;
+    margin-top: 5px;
+  }
+  .strike-column-3 {
+    height: 98%;
+    width: 4px;
+    left: 93%;
+    margin-top: 5px;
+  }
+  .strike-diagonal-1 {
+    width: 109%;
+    height: 4px;
+    top: 50%;
+    left: 2.5%;
+    transform: skewY(45deg);
+  }
+  .strike-diagonal-2 {
+    width: 109%;
+    height: 4px;
+    top: 50%;
+    left: 1.5%;
+    transform: skewY(-45deg);
+  }
 
 }
 .TicTacToe-header,
