@@ -13,7 +13,8 @@ function Box ({value, onClick, isXTurn, isLive}) {
             boxClass += isXTurn  ? " next-X-turn" : " next-O-turn";
         }
     }
-    return (<button onClick = {onClick} className={boxClass}>{value}</button>);
+
+    return (<button onClick = {onClick} className={boxClass} disabled = {isXTurn}>{value}</button>);
 }
 function Strike ({newClass, winner}) {
     const strikeClass = (winner === "O" ? "strike-o" : "strike-x") + newClass;
@@ -52,7 +53,7 @@ const TicTacToe = () => {
     const [isLive, setIsLive] = useState(true);
     const [winType, setWinType] = useState('');
     const [winner, setWinner] = useState('');
-    function getWinner(box) {
+    function getWinner(box, isFinal) {
         const winCondition = [
             [0, 1, 2], //column1
             [3, 4, 5], //column2
@@ -66,58 +67,112 @@ const TicTacToe = () => {
         for (let i =0; i < winCondition.length; i++) {
             const[x,y,z] = winCondition[i];
             if (box[x] && box[x] === box[y] && box[x] === box[z]) {
+                if (isFinal) {
+                    if (i === 0) {
+                        setWinType(' strike-column-1');
+                   }
+                   else if (i === 1) {
+                       setWinType(' strike-column-2');
+                   }
 
-                if (i === 0) {
-                     setWinType(' strike-column-1');
-                }
-                else if (i === 1) {
-                    setWinType(' strike-column-2');
-                }
+                   else if (i === 2) {
+                       setWinType(' strike-column-3');
+                   }
 
-                else if (i === 2) {
-                    setWinType(' strike-column-3');
-                }
+                   else if (i === 3) {
+                       setWinType(' strike-row-3');
+                   }
 
-                else if (i === 3) {
-                    setWinType(' strike-row-3');
-                }
+                   else if (i === 4) {
+                       setWinType(' strike-diagonal-1');
+                   }
 
-                else if (i === 4) {
-                    setWinType(' strike-diagonal-1');
-                }
+                   else if (i === 5) {
+                       setWinType(' strike-diagonal-2');
+                   }
 
-                else if (i === 5) {
-                    setWinType(' strike-diagonal-2');
-                }
+                   else if (i === 6) {
 
-                else if (i === 6) {
+                       setWinType(' strike-row-1');
+                   }
 
-                    setWinType(' strike-row-1');
-                }
-
-                else if (i === 7) {
-                    setWinType(' strike-row-2');
+                   else if (i === 7) {
+                       setWinType(' strike-row-2');
+                   }
                 }
                 return box[x];
             }
         }
         return null;
     }
-    function aiTurn(box) {
-        let copyBox = [...box];
-        for (var i =0; i< box.length; i++) {
-            //miniMax(box, 0, true);
-            if (copyBox[i] == '') {
-                copyBox[i] = 'X';
-                setIsXTurn(false);
-                setBox(copyBox);
-                return;
+    function miniMax(copyBox, depth, isXTurn) {
+        var bestScore;
+        var score;
+
+        // Check for a winner or if the game is a draw
+        const winner = getWinner(copyBox, false);
+        if (winner) {
+            if (winner === 'X') {
+                return 1;
+            } else if (winner === 'O') {
+                return -1;
             }
+        } else if (copyBox.every(item => item !== '')) {
+            return 0;
+        }
+
+        if (isXTurn) {
+            bestScore = -Infinity;
+            for (var i = 0; i < copyBox.length; i++) {
+                if (copyBox[i] === '') {
+                    copyBox[i] = 'X';
+                    score = miniMax([...copyBox], depth + 1, false);
+                    copyBox[i] = '';
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            bestScore = Infinity;
+            for (var i = 0; i < copyBox.length; i++) {
+                if (copyBox[i] === '') {
+                    copyBox[i] = 'O';
+                    score = miniMax([...copyBox], depth + 1, true);
+                    copyBox[i] = '';
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
         }
     }
+
+    function aiTurn(box) {
+        let copyBox = [...box];
+        var bestScore = -Infinity;
+        var bestMove = -1;
+
+        for (var i = 0; i < box.length; i++) {
+            if (copyBox[i] === '') {
+                copyBox[i] = 'X';
+                var score = miniMax([...copyBox], 0, false);
+                copyBox[i] = '';
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                }
+            }
+        }
+
+
+            copyBox[bestMove] = 'X';
+            setBox(copyBox);
+            setIsXTurn(false);
+
+    }
+
     function handleClick(getCurrBox) {
         let copyBox = [...box];
-        if (getWinner(copyBox) || copyBox[getCurrBox]) {
+        if (getWinner(copyBox, false) || copyBox[getCurrBox]) {
             return;
         }
 
@@ -133,26 +188,26 @@ const TicTacToe = () => {
         setWinType('');
         setWinner('');
     }
-    function sleep() {
-        return setTimeout(() => {
-            aiTurn(box);
-          }, 2000);
-    }
+
     useEffect(() => {
-        if (isXTurn && isLive) {
-            sleep();
-        }
-      }, [isXTurn, isLive, box]);
+        const timeoutId = setTimeout(() => {
+            if (isXTurn && isLive) {
+                aiTurn(box);
+            }
+          }, 500);
+
+          return () => clearTimeout(timeoutId);
+      }, [isXTurn, box, status]);
     useEffect(() => {
-        if (!getWinner(box) && box.every(item =>item !== '' )) {
+        if (!getWinner(box, false) && box.every(item =>item !== '' )) {
             setStatus("Game Drawn!");
             setIsLive(false);
 
         }
-        else if (getWinner(box)){
-            setStatus((getWinner(box)) + " Wins!");
+        else if (getWinner(box, true)){
+            setStatus((getWinner(box, true)) + " Wins!");
             setIsLive(false);
-            setWinner(getWinner(box));
+            setWinner(getWinner(box, true));
         }
         else {
             let xTurn = "X's Turn (Ai is thinking...)";

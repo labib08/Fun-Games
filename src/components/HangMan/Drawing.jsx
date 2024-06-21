@@ -1,4 +1,4 @@
-function HangManHead({}) {
+function HangManHead() {
     return <div className="hangman-head"/>
 }
 
