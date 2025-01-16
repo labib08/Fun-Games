@@ -7,7 +7,7 @@
 This project demonstrates the application of advanced algorithms, state management, and responsive UI design to create an enjoyable gaming experience.
 
 # Demo
-[Click Here] (https://react-fun-games.netlify.app/)
+[Click Here](https://react-fun-games.netlify.app/)
 # Minimax Algorithm in Tic Tac Toe
 The **Minimax algorithm** is implemented in Tic Tac Toe to create **an unbeatable AI**. Here's a brief overview of how it works:
 
